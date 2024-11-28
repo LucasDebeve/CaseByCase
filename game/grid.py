@@ -1,5 +1,5 @@
-import pygame
 import numpy as np
+import pygame
 
 
 class Grid:
@@ -20,10 +20,19 @@ class Grid:
 	def grid(self) -> np.ndarray:
 		return self.__grid
 
+	@property
+	def player(self):
+		return self.__player
+
 	def toggle_cell(self, x: int, y: int) -> None:
 		if x < 0 or x >= self.__width or y < 0 or y >= self.__height:
 			raise IndexError("Cell out of bounds")
 		self.__grid[x, y] = 1 - self.__grid[x, y]
+
+	def set_cell(self, x: int, y: int, value: int) -> None:
+		if x < 0 or x >= self.__width or y < 0 or y >= self.__height:
+			raise IndexError("Cell out of bounds")
+		self.__grid[x, y] = value
 
 	def clear(self) -> None:
 		self.__grid = np.zeros((self.__width, self.__height), dtype=int)

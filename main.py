@@ -1,6 +1,8 @@
 import pygame
-from settings import WINDOW_HEIGHT, WINDOW_WIDTH, GRID_SIZE, FPS
+
 from game.grid import Grid
+from game.player import Player
+from settings import FPS, GRID_SIZE, WINDOW_HEIGHT, WINDOW_WIDTH
 
 pygame.init()
 
@@ -9,6 +11,7 @@ pygame.display.set_caption("Case By Case")
 clock = pygame.time.Clock()
 
 grid = Grid(GRID_SIZE, GRID_SIZE)
+player = Player(0, 0, grid)
 grid.randomize()
 
 
@@ -19,6 +22,18 @@ def main():
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				running = False
+
+		# Mise à jour
+		# Key released
+		if event.type == pygame.KEYDOWN:
+			if event.key == pygame.K_UP:
+				player.move(0, -1, grid)
+			elif event.key == pygame.K_DOWN:
+				player.move(0, 1, grid)
+			elif event.key == pygame.K_LEFT:
+				player.move(-1, 0, grid)
+			elif event.key == pygame.K_RIGHT:
+				player.move(1, 0, grid)
 
 		# Affichage
 		screen.fill((0, 0, 0))
