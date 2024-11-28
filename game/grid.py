@@ -21,6 +21,8 @@ class Grid:
 		return self.__grid
 
 	def toggle_cell(self, x: int, y: int) -> None:
+		if x < 0 or x >= self.__width or y < 0 or y >= self.__height:
+			raise IndexError("Cell out of bounds")
 		self.__grid[x, y] = 1 - self.__grid[x, y]
 
 	def clear(self) -> None:
