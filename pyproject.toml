@@ -1,5 +1,9 @@
 [project]
 name = "CaseByCase"
+version = "0.1.0"
+description = "A python game where you play a pixel detective."
+authors = [{ name = "Lucas Debeve", email = "lucas.debeve2003@gmail.com" }]
+readme = "README.md"
 requires-python = ">=3.10"
 
 [tool.ruff]
