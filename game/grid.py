@@ -3,10 +3,13 @@ import pygame
 
 
 class Grid:
+	VALUES = [0, 1]
+
 	def __init__(self, width: int, height: int) -> None:
 		self.__width = width
 		self.__height = height
 		self.__grid = np.zeros((width, height), dtype=int)
+		self.__playerPos = (0, 0)
 
 	@property
 	def width(self) -> int:
@@ -24,10 +27,20 @@ class Grid:
 	def player(self):
 		return self.__player
 
+	@property
+	def playerPos(self):
+		return self.__playerPos
+
+	@playerPos.setter
+	def playerPos(self, value):
+		self.__playerPos = value
+
 	def toggle_cell(self, x: int, y: int) -> None:
 		if x < 0 or x >= self.__width or y < 0 or y >= self.__height:
 			raise IndexError("Cell out of bounds")
-		self.__grid[x, y] = 1 - self.__grid[x, y]
+		self.__grid[x, y] = self.VALUES[
+			(self.__grid[x, y] + 1) % len(self.VALUES)
+		]
 
 	def set_cell(self, x: int, y: int, value: int) -> None:
 		if x < 0 or x >= self.__width or y < 0 or y >= self.__height:
@@ -48,7 +61,7 @@ class Grid:
 
 		for x in range(self.__width):
 			for y in range(self.__height):
-				if self.__grid[x, y] == 2:
+				if self.__playerPos == (x, y):
 					pygame.draw.rect(
 						screen,
 						(255, 255, 255),

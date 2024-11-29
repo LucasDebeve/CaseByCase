@@ -1,3 +1,4 @@
+import asyncio
 import pygame
 
 from game.grid import Grid
@@ -27,13 +28,14 @@ def main():
 		# Key released
 		if event.type == pygame.KEYDOWN:
 			if event.key == pygame.K_UP:
-				player.move(0, -1, grid)
+				# Move is async
+				asyncio.run(player.move(0, -1))
 			elif event.key == pygame.K_DOWN:
-				player.move(0, 1, grid)
+				asyncio.run(player.move(0, 1))
 			elif event.key == pygame.K_LEFT:
-				player.move(-1, 0, grid)
+				asyncio.run(player.move(-1, 0))
 			elif event.key == pygame.K_RIGHT:
-				player.move(1, 0, grid)
+				asyncio.run(player.move(1, 0))
 
 		# Affichage
 		screen.fill((0, 0, 0))
