@@ -9,7 +9,7 @@ class Grid:
 		self.__width = width
 		self.__height = height
 		self.__grid = np.zeros((width, height), dtype=int)
-		self.__playerPos = (0, 0)
+		self.__playerPos = None
 
 	@property
 	def width(self) -> int:

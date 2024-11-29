@@ -7,7 +7,7 @@ class Player:
 		self.__x = x
 		self.__y = y
 		self.__grid = grid
-		self.__grid.set_cell(self.__x, self.__y, 2)
+		self.__grid.playerPos = (self.__x, self.__y)
 		self.__readeyToMove = True
 
 	@property

@@ -13,7 +13,6 @@ clock = pygame.time.Clock()
 
 grid = Grid(GRID_SIZE, GRID_SIZE)
 player = Player(0, 0, grid)
-grid.randomize()
 
 
 def main():
