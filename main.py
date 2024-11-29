@@ -1,6 +1,9 @@
+import asyncio
 import pygame
-from settings import WINDOW_HEIGHT, WINDOW_WIDTH, GRID_SIZE, FPS
+
 from game.grid import Grid
+from game.player import Player
+from settings import FPS, GRID_SIZE, WINDOW_HEIGHT, WINDOW_WIDTH
 
 pygame.init()
 
@@ -9,7 +12,7 @@ pygame.display.set_caption("Case By Case")
 clock = pygame.time.Clock()
 
 grid = Grid(GRID_SIZE, GRID_SIZE)
-grid.randomize()
+player = Player(0, 0, grid)
 
 
 def main():
@@ -19,6 +22,19 @@ def main():
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				running = False
+
+		# Mise à jour
+		# Key released
+		if event.type == pygame.KEYDOWN:
+			if event.key == pygame.K_UP:
+				# Move is async
+				asyncio.run(player.move(0, -1))
+			elif event.key == pygame.K_DOWN:
+				asyncio.run(player.move(0, 1))
+			elif event.key == pygame.K_LEFT:
+				asyncio.run(player.move(-1, 0))
+			elif event.key == pygame.K_RIGHT:
+				asyncio.run(player.move(1, 0))
 
 		# Affichage
 		screen.fill((0, 0, 0))
