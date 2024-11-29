@@ -3,10 +3,10 @@ from game.grid import Grid
 
 
 class Player:
-	def __init__(self, x: int, y: int, grid: Grid) -> None:
+	def __init__(self, x: int, y: int, grid: Grid = None) -> None:
 		self.__x = x
 		self.__y = y
-		self.__grid = grid
+		self.__grid = grid if grid else Grid(6, 6)
 		self.__grid.playerPos = (self.__x, self.__y)
 		self.__readeyToMove = True
 
